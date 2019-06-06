@@ -1,4 +1,11 @@
 import { Application } from 'probot' // eslint-disable-line no-unused-vars
+import * as shell from 'shelljs'
+
+if (shell.which('black')) {
+  console.log('***yay! have black')
+} else {
+  console.error('***WTF! dont have black')
+}
 
 export = (app: Application) => {
   app.on('issues.opened', async (context) => {
