@@ -1,5 +1,6 @@
 .idea
 .env
+yarn.lock
 
 
 # Created by https://www.gitignore.io/api/node,python,intellij+all
