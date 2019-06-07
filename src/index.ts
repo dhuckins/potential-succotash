@@ -1,15 +1,17 @@
 import { Application } from 'probot' // eslint-disable-line no-unused-vars
 import * as shell from 'shelljs'
 
-if (shell.which('black')) {
-  console.log('***yay! have black')
-} else {
-  console.error('***WTF! dont have black')
-}
-
 export = (app: Application) => {
+  if (shell.which('black')) {
+    app.log.info('***yay! have black')
+  } else {
+    app.log.error('***WTF! dont have black')
+  }
+
   app.on('issues.opened', async (context) => {
-    const issueComment = context.issue({ body: 'Thanks for opening this issue!' })
+    const issueComment = context.issue({
+      body: 'Thanks for opening this issue!'
+    })
     await context.github.issues.createComment(issueComment)
   })
   // For more information on building apps:
