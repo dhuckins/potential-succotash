@@ -10,13 +10,8 @@ export = (app: Application) => {
 
   app.on('pull_request.opened', async (context: Context) => {
     let pullRequest = context.payload.pull_request
-    let commit = await context.github.gitdata.getCommit({
-      commit_sha: pullRequest.head.sha,
-      owner: pullRequest.head.owner.login,
-      repo: pullRequest.head.name
-    })
     await context.github.issues.createComment(context.issue({
-      body: JSON.stringify(commit)
+      body: JSON.stringify(pullRequest, null, '  ')
     }))
   })
 
