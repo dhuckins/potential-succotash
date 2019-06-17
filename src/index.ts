@@ -13,7 +13,7 @@ export = (app: Application) => {
     async (context: Context) => {
       let pullRequest = context.payload.pull_request
       const { owner, repo, number } = context.issue()
-      let prFiles = context.github.pullRequests.listFiles({
+      let prFiles = await context.github.pullRequests.listFiles({
         owner, repo, number
       })
       await context.github.issues.createComment(context.issue({
